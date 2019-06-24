@@ -1,0 +1,12 @@
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\bin\Debug\TaskManager.Model.dll
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\bin\Debug\TaskManager.Model.pdb
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.csproj.CoreCompileInputs.cache
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.dll
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.pdb
+C:\Users\indalma\Downloads\FSD\Capsule\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.csprojAssemblyReference.cache
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\bin\Debug\TaskManager.Model.dll
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\bin\Debug\TaskManager.Model.pdb
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.csprojAssemblyReference.cache
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.csproj.CoreCompileInputs.cache
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.dll
+C:\Users\indalma\Downloads\FSD\FSD_PART_2\TaskManager.API\TaskManager.Model\obj\Debug\TaskManager.Model.pdb
