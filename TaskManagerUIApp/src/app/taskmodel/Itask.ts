@@ -6,5 +6,4 @@ export interface Itask {
     StartDate:Date;
     EndDate:Date;
     Priority:number;
-    Status:string;   
   }

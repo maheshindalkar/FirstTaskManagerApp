@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AddComponent } from './addtask/add/add.component';
 import { UpdateComponent } from './updatetask/update/update.component';
 import { ViewComponent } from './viewtask/view/view.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ViewComponent } from './viewtask/view/view.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'add', component: AddComponent },
       { path: '', redirectTo: 'add', pathMatch: 'full' },

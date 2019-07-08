@@ -22,5 +22,5 @@ errorMessage = '';
       },
       error => this.errorMessage = <any>error
     );
-       
+    }  
 }
