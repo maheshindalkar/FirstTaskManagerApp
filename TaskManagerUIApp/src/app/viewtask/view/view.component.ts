@@ -10,7 +10,6 @@ import { TaskManagerService } from 'src/app/service/TaskManager.Service';
 export class ViewComponent implements OnInit {
 errorMessage = '';
   tasks : Itask[] =[];
-  tasks1 : Itask[] =[];
   constructor(private taskmanagerService: TaskManagerService) {
 
   }
@@ -22,5 +21,20 @@ errorMessage = '';
       },
       error => this.errorMessage = <any>error
     );
-    }  
+    }
+    
+    public onDeleteClick(task)
+    {
+      console.log(task.UserTaskId);
+      
+      this.taskmanagerService.deleteTaskManagerDetails(task.UserTaskId).subscribe(
+        taskList => {
+          this.taskmanagerService.getTaskManagerDetails().subscribe(
+            taskList => {
+              this.tasks = taskList;
+            },
+            error => this.errorMessage = <any>error
+          );
+        });
+    }
 }

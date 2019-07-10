@@ -25,6 +25,17 @@ export class TaskManagerService {
       return this.http.post<Itask>(this.url ,task, httpOptions); 
       } 
 
+      deleteTaskManagerDetails(taskID: number): Observable<Itask> { 
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
+        return this.http.delete<Itask>(this.url+'?id='+ taskID, httpOptions); 
+        } 
+
+        updateTaskManagerDetails(task: Itask): Observable<Itask> { 
+          const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
+          return this.http.put<Itask>(this.url ,task, httpOptions); 
+          } 
+        
+
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console

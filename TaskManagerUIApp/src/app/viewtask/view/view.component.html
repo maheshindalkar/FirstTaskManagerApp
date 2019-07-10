@@ -81,10 +81,15 @@
   </thead>
   <tbody>
     <tr *ngFor='let task of tasks'>
-      <td class="d-none">{{task.TaskId}}</td>
+
+      <td id="taskId" #TaskId class="d-none">{{task.UserTaskId}}
+          <label #lblName id="lblName">
+              {{task.UserTaskId}}
+            </label>
+      </td>
       <td>
         <div class="card" style="width: 12rem;background:lightgrey;">
-          <div class="card-body">{{task.Task}}</div>
+          <div id="tdiv" class="card-body">{{task.Task}}</div>
         </div>
       </td>
       <td><span class="d-none">{{task.ParentTaskId}}</span>
@@ -100,7 +105,7 @@
         <div class="form-group">
           <button class="btn btn-secondary btn-sm" [routerLink]="['/update',task]" routerLinkActive="router-link-active">Edit</button> |
           <button class="btn btn-secondary btn-sm">End Task</button> |
-          <button class="btn btn-warning btn-sm" >Delete</button>
+          <button class="btn btn-warning btn-sm" (click)="onDeleteClick(task)">Delete</button>
         </div>
       </td>
     </tr>

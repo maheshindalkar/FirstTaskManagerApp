@@ -66,7 +66,7 @@ namespace TaskManager.API.Controllers
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]UserTaskModel record)
+        public void Put([FromBody]UserTaskModel record)
         {
             try
             {

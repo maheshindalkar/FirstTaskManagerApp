@@ -50,15 +50,6 @@ namespace TaskManager.DAL
             List<UserTaskModel> taskModelList;
             try
             {
-                UserTaskModel userTaskModel = new UserTaskModel();
-                userTaskModel.Task = "first task";
-                userTaskModel.ParentTask = "parent task";
-                userTaskModel.Priority = 2;
-                userTaskModel.StartDate = DateTime.Now;
-                userTaskModel.EndDate = DateTime.Now;
-                Insert(userTaskModel);
-
-
                 using (var context = new TaskManagerDbContext())
                 {
                     taskModelList = (from u in context.UserTasks
@@ -72,9 +63,7 @@ namespace TaskManager.DAL
                                          EndDate = u.EndDate,
                                          StartDate = u.StartDate,
                                          Priority = u.Priority
-                                     }).ToList();
-
-
+                                     }).OrderByDescending(a => a.UserTaskId).ToList();
                 }
             }
             catch (Exception ex)
