@@ -17,11 +17,15 @@ namespace TaskManager.API.Controllers
         {
             try
             {
-                using (var task = new TaskManagerOperations())
-                {
+                List<UserTaskModel> lt = new List<UserTaskModel>();
+               var abc =  new UserTaskModel(){ UserTaskId = 1, EndDate = DateTime.Now, ParentId=2,ParentTask="mahesh", Priority= 1, StartDate = DateTime.Now, Task="tem" };
+                lt.Add(abc);
+                return lt;
+                //using (var task = new TaskManagerOperations())
+                //{
 
-                    return task.GetTaskDetails();
-                }
+                //    return task.GetTaskDetails();
+                //}
 
             }
             catch (Exception ex)
