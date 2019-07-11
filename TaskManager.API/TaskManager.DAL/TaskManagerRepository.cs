@@ -50,26 +50,21 @@ namespace TaskManager.DAL
             List<UserTaskModel> taskModelList;
             try
             {
-                List<UserTaskModel> lt = new List<UserTaskModel>();
-                var abc = new UserTaskModel() { UserTaskId = 1, EndDate = DateTime.Now, ParentId = 2, ParentTask = "mahesh", Priority = 1, StartDate = DateTime.Now, Task = "Dal Layer" };
-                lt.Add(abc);
-                return lt;
-
-                //using (var context = new TaskManagerDbContext())
-                //{
-                //    taskModelList = (from u in context.UserTasks
-                //                     join p in context.ParentTasks on u.ParentTaskId equals p.ParentId
-                //                     select new UserTaskModel()
-                //                     {
-                //                         UserTaskId = u.UserTaskId,
-                //                         ParentId = p.ParentId,
-                //                         Task = u.TaskDetail,
-                //                         ParentTask = p.ParentTaskDetail,
-                //                         EndDate = u.EndDate,
-                //                         StartDate = u.StartDate,
-                //                         Priority = u.Priority
-                //                     }).OrderByDescending(a => a.UserTaskId).ToList();
-                //}
+                using (var context = new TaskManagerDbContext())
+                {
+                    taskModelList = (from u in context.UserTasks
+                                     join p in context.ParentTasks on u.ParentTaskId equals p.ParentId
+                                     select new UserTaskModel()
+                                     {
+                                         UserTaskId = u.UserTaskId,
+                                         ParentId = p.ParentId,
+                                         Task = u.TaskDetail,
+                                         ParentTask = p.ParentTaskDetail,
+                                         EndDate = u.EndDate,
+                                         StartDate = u.StartDate,
+                                         Priority = u.Priority
+                                     }).OrderByDescending(a => a.UserTaskId).ToList();
+                }
             }
             catch (Exception ex)
             {

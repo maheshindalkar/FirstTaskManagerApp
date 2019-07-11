@@ -9,7 +9,7 @@ using TaskManager.Model;
 namespace TaskManager.API.Controllers
 {
     [RoutePrefix("api/TaskManager")]
-    //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TaskManagerController : ApiController, IDisposable
     {
         // GET api/values
@@ -17,11 +17,12 @@ namespace TaskManager.API.Controllers
         {
             try
             {
-                using (var task = new TaskManagerOperations())
+               using (var task = new TaskManagerOperations())
                 {
 
                     return task.GetTaskDetails();
                 }
+
             }
             catch (Exception ex)
             {

@@ -9,7 +9,7 @@ import { Itask } from 'src/app/taskmodel/Itask';
   providedIn: 'root'
 })
 export class TaskManagerService {
-  private url = 'http://localhost:56858/api/TaskManager/';
+  private url = 'https://taksmanagerapiservice.azurewebsites.net/api/TaskManager/';
  
   
   constructor(private http: HttpClient) { }
