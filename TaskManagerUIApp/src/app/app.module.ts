@@ -8,6 +8,11 @@ import { AddComponent } from './addtask/add/add.component';
 import { UpdateComponent } from './updatetask/update/update.component';
 import { ViewComponent } from './viewtask/view/view.component';
 import { FormsModule } from '@angular/forms';
+import { AdduserComponent } from './adduser/adduser.component';
+import { UpdateuserComponent } from './updateuser/updateuser.component';
+import { AddprojectComponent } from './addproject/addproject.component';
+import { UpdateprojectComponent } from './updateproject/updateproject.component';
+import { ViewuserComponent } from './viewuser/viewuser.component';
 
 
 @NgModule({
@@ -15,7 +20,12 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     AddComponent,
     UpdateComponent,
-    ViewComponent
+    ViewComponent,
+    AdduserComponent,
+    UpdateuserComponent,
+    AddprojectComponent,
+    UpdateprojectComponent,
+    ViewuserComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +33,13 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'add', component: AddComponent },
+      { path: 'addproject', component: AddprojectComponent },
+      { path: '', redirectTo: 'addproject', pathMatch: 'full' },
+      { path: 'addtask', component: AddComponent },
       { path: '', redirectTo: 'add', pathMatch: 'full' },
-      { path: 'view', component: ViewComponent },
+      { path: 'addUser', component: AdduserComponent },
+      { path: '', redirectTo: 'addUser', pathMatch: 'full' },
+      { path: 'viewtask', component: ViewComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
       { path: 'update', component: UpdateComponent },
       { path: '', redirectTo: 'update', pathMatch: 'full' },

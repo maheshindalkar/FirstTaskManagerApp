@@ -12,8 +12,8 @@ namespace TaskManager.DAL
         bool Insert(TEntity entity);
         bool Update(TEntity entity);
         bool DeleteById(int id);
-        TEntity GetTaskDetailsById(int id);
-        List<TEntity> GetTaskDetails();
+        //TEntity GetTaskDetailsById(int id);
+        List<TEntity> GetDetails();
         #endregion
     }
 }

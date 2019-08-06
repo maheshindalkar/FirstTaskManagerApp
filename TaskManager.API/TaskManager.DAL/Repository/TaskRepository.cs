@@ -4,15 +4,14 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using TaskManager.Model;
-
 namespace TaskManager.DAL
 {
-    public class TaskManagerRepository : ITaskManagerRepository<UserTaskModel>, IDisposable
+    public class TaskRepository : ITaskManagerRepository<TaskModel>, IDisposable
     {
-        public TaskManagerRepository()
+        public TaskRepository()
         {
         }
-        public bool Insert(UserTaskModel userTaskModel)
+        public bool Insert(TaskModel userTaskModel)
         {
             try
             {
@@ -26,16 +25,18 @@ namespace TaskManager.DAL
                     context.SaveChanges();
                     int parentId = parentEntity.ParentId;
 
-                    var userTask = new UserTask()
+                    var userTask = new Task()
                     {
-                        ParentTaskId = parentId,
-                        TaskDetail = userTaskModel.Task,
+                        ParentId = userTaskModel.ParentId,
+                        TasksDetail = userTaskModel.Task,
                         StartDate = userTaskModel.StartDate,
                         EndDate = userTaskModel.EndDate,
                         Priority = userTaskModel.Priority,
+                        ProjectId = userTaskModel.ProjectId,
+                        Status = userTaskModel.Status
                     };
 
-                    context.UserTasks.Add(userTask);
+                    context.Tasks.Add(userTask);
                     context.SaveChanges();
                     return true;
                 }
@@ -45,25 +46,26 @@ namespace TaskManager.DAL
                 throw ex.InnerException;
             }
         }
-        public List<UserTaskModel> GetTaskDetails()
+
+        public List<TaskModel> GetDetails()
         {
-            List<UserTaskModel> taskModelList;
+            List<TaskModel> taskModelList;
             try
             {
                 using (var context = new TaskManagerDbContext())
                 {
-                    taskModelList = (from u in context.UserTasks
-                                     join p in context.ParentTasks on u.ParentTaskId equals p.ParentId
-                                     select new UserTaskModel()
+                    taskModelList = (from u in context.Tasks
+                                     join p in context.ParentTasks on u.ParentId equals p.ParentId
+                                     select new TaskModel()
                                      {
-                                         UserTaskId = u.UserTaskId,
+                                         TaskId = u.TaskId,
                                          ParentId = p.ParentId,
-                                         Task = u.TaskDetail,
+                                         Task = u.TasksDetail,
                                          ParentTask = p.ParentTaskDetail,
                                          EndDate = u.EndDate,
                                          StartDate = u.StartDate,
                                          Priority = u.Priority
-                                     }).OrderByDescending(a => a.UserTaskId).ToList();
+                                     }).OrderByDescending(a => a.TaskId).ToList();
                 }
             }
             catch (Exception ex)
@@ -73,51 +75,22 @@ namespace TaskManager.DAL
             return taskModelList;
         }
 
-        public UserTaskModel GetTaskDetailsById(int id)
-        {
-            UserTaskModel taskModelList;
-            try
-            {
-                using (var context = new TaskManagerDbContext())
-                {
-                     taskModelList = (from u in context.UserTasks
-                                         join p in context.ParentTasks on u.ParentTaskId equals p.ParentId
-                                         where u.UserTaskId == id
-                                         select new UserTaskModel()
-                                         {
-                                             UserTaskId = u.UserTaskId,
-                                             ParentId = p.ParentId,
-                                             Task = u.TaskDetail,
-                                             ParentTask = p.ParentTaskDetail,
-                                             EndDate = u.EndDate,
-                                             StartDate = u.StartDate,
-                                             Priority = u.Priority
-                                         }).FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return taskModelList;
-        }
-
-        public bool Update(UserTaskModel userTaskModel)
+        public bool Update(TaskModel userTaskModel)
         {
             try
             {
                 using (var context = new TaskManagerDbContext())
                 {
-                    var taskModel = (from c in context.UserTasks
-                                     where c.UserTaskId == userTaskModel.UserTaskId
+                    var taskModel = (from c in context.Tasks
+                                     where c.TaskId == userTaskModel.TaskId
                                      select c).FirstOrDefault();
-                    taskModel.TaskDetail = userTaskModel.Task;
+                    taskModel.TasksDetail = userTaskModel.Task;
                     taskModel.Priority = userTaskModel.Priority;
                     taskModel.StartDate = userTaskModel.StartDate;
                     taskModel.StartDate = userTaskModel.EndDate;
+                    taskModel.Status = userTaskModel.Status;
 
-
-                    context.UserTasks.Add(taskModel);
+                    context.Tasks.Add(taskModel);
                     context.Entry(taskModel).State = EntityState.Modified;
                     context.SaveChanges();
 
@@ -144,15 +117,15 @@ namespace TaskManager.DAL
             {
                 using (var context = new TaskManagerDbContext())
                 {
-                    var taskModel = (from c in context.UserTasks
-                                     where c.UserTaskId == id
+                    var taskModel = (from c in context.Tasks
+                                     where c.TaskId == id
                                      select c).FirstOrDefault();
-                    context.UserTasks.Remove(taskModel);
+                    context.Tasks.Remove(taskModel);
                     context.Entry(taskModel).State = EntityState.Deleted;
                     context.SaveChanges();
 
                     var parentTaskModel = (from c in context.ParentTasks
-                                           where c.ParentId == taskModel.ParentTaskId
+                                           where c.ParentId == taskModel.ParentId
                                            select c).FirstOrDefault();
                     context.ParentTasks.Remove(parentTaskModel);
                     context.Entry(parentTaskModel).State = EntityState.Deleted;

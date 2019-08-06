@@ -12,16 +12,33 @@ namespace TaskManager.DAL
 
             Database.SetInitializer<TaskManagerDbContext>(new DropCreateDatabaseIfModelChanges<TaskManagerDbContext>());
         }
-        public DbSet<UserTask> UserTasks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
         public DbSet<Parent> ParentTasks { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Users> Users { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserTask>()
+            modelBuilder.Entity<Task>()
             .HasRequired<Parent>(s => s.ParentTask)
-            .WithMany(g => g.UserTasks)
-            .HasForeignKey<int>(s => s.ParentTaskId);
+            .WithMany(g => g.Tasks)
+            .HasForeignKey<int>(s => s.ParentId);
 
+            modelBuilder.Entity<Task>()
+            .HasRequired<Project>(s => s.Projects)
+            .WithMany(g => g.Taks)
+            .HasForeignKey<int>(s => s.ProjectId);
 
+            modelBuilder.Entity<Task>()
+           .HasRequired<Users>(s => s.Users)
+           .WithMany(g => g.Tasks)
+           .HasForeignKey<int>(s => s.UserId);
+
+            modelBuilder.Entity<Project>()
+            .HasRequired<Users>(s => s.Users)
+            .WithMany(g => g.Projects)
+            .HasForeignKey<int>(s => s.ManagerId)
+            .WillCascadeOnDelete(false);
         }
         public class TaskInitializer : DropCreateDatabaseIfModelChanges<TaskManagerDbContext>
         {

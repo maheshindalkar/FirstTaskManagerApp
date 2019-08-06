@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProjectManagerOperations\ProjectsOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskManagerOperations.cs" />
+    <Compile Include="ProjectManagerOperations\TaskOperations.cs" />
+    <Compile Include="ProjectManagerOperations\UsersOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskManager.DAL\TaskManager.DAL.csproj">

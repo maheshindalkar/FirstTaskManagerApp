@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManager.DAL;
 using TaskManager.Model;
 
 namespace TaskManager.Business
 {
-    public class TaskManagerOperations : IDisposable
+    public class TaskOperations : IDisposable
     {
         // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
-        public List<UserTaskModel> GetTaskDetails()
+        public List<TaskModel> GetTaskDetails()
         {
             try
             {
-                using (var repository = new TaskManagerRepository())
+                using (var repository = new TaskRepository())
                 {
-                    var taskdetails = repository.GetTaskDetails();
+                    var taskdetails = repository.GetDetails();
                     return taskdetails;
                }
             }
@@ -30,26 +27,12 @@ namespace TaskManager.Business
                 throw ex;
             }
         }
-        public UserTaskModel GetTaskDetailsById(int id)
-        {
-            try
-            {
-                using (var repository = new DAL.TaskManagerRepository())
-                {
-                    return repository.GetTaskDetailsById(id);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
-        public bool InsertTask(UserTaskModel taskEntity)
+        public bool InsertTask(TaskModel taskEntity)
         {
             try
             {
-               using (var repository = new DAL.TaskManagerRepository())
+               using (var repository = new DAL.TaskRepository())
                 {
                    return repository.Insert(taskEntity);
                 }
@@ -60,11 +43,11 @@ namespace TaskManager.Business
             }
         }
 
-        public bool UpdateTask(UserTaskModel taskEntity)
+        public bool UpdateTask(TaskModel taskEntity)
         {
             try
             {
-                using (var repository = new DAL.TaskManagerRepository())
+                using (var repository = new DAL.TaskRepository())
                 {
                     return repository.Update(taskEntity);
                 }
@@ -78,7 +61,7 @@ namespace TaskManager.Business
         {
             try
             {
-                using (var repository = new DAL.TaskManagerRepository())
+                using (var repository = new DAL.TaskRepository())
                 {
                     return repository.DeleteById(taskId);
                 }

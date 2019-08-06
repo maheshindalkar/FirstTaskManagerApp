@@ -8,52 +8,34 @@ using TaskManager.Model;
 
 namespace TaskManager.API.Controllers
 {
-    [RoutePrefix("api/TaskManager")]
+    [RoutePrefix("api/Task")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class TaskManagerController : ApiController, IDisposable
+    public class TaskController : ApiController, IDisposable
     {
         // GET api/values
-        public List<UserTaskModel> GetTaskDetails()
+        public List<TaskModel> GetTaskDetails()
         {
             try
             {
-               using (var task = new TaskManagerOperations())
+               using (var task = new TaskOperations())
                 {
 
                     return task.GetTaskDetails();
                 }
-
             }
             catch (Exception ex)
             {
 
-                throw ex;
-            }
-        }
-        //[Route("GetTaskDetailsById/{id}")]
-        public UserTaskModel GetTaskDetailsById(int id)
-        {
-            try
-            {
-                using (var task = new TaskManagerOperations())
-                {
-
-                    return task.GetTaskDetailsById(id);
-                }
-
-            }
-            catch (Exception ex)
-            {
                 throw ex;
             }
         }
 
        // POST api/values
-        public void Post([FromBody]UserTaskModel record)
+        public void Post([FromBody]TaskModel record)
         {
             try
             {
-                using (var task = new TaskManagerOperations())
+                using (var task = new TaskOperations())
                 {
                     var opSuccess = task.InsertTask(record);
                 }
@@ -66,11 +48,11 @@ namespace TaskManager.API.Controllers
         }
 
         // PUT api/values/5
-        public void Put([FromBody]UserTaskModel record)
+        public void Put([FromBody]TaskModel record)
         {
             try
             {
-                using (var task = new TaskManagerOperations())
+                using (var task = new TaskOperations())
                 {
                     var opSuccess = task.UpdateTask(record);
                 }
@@ -87,7 +69,7 @@ namespace TaskManager.API.Controllers
         {
             try
             {
-                using (var task = new TaskManagerOperations())
+                using (var task = new TaskOperations())
                 {
                     var opSuccess = task.DeleteTaskById(id);
                 }
