@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user.Service';
 import { Iuser } from 'src/app/taskmodel/Iuser';
 import { Router } from '@angular/router';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-adduser',
@@ -13,29 +14,62 @@ export class AdduserComponent implements OnInit {
   pageTitle:string="Add Task";
   user:Iuser ;
   formUser = {};
+  userid: number;
+  lstname: string = '';
+  fstname: string = '';
+  btnadd: string = '';
+  empid: string = '';
+  istrue : boolean = false;
+  
   constructor(private userService: UserService,private router: Router) {
 
   }
 
   ngOnInit() {
   }
-  public onSubmit(form) {
+  getUpdatedvalue($event) {  
+    console.log($event.UserId); 
+    this.userid = $event.UserId
+    this.fstname = $event.FirstName;  
+    this.lstname = $event.LastName;
+    this.empid =  $event.EmployeeId
+    this.istrue = true;
+    document.getElementById('btnadditem').innerHTML = "Update";
+    } 
+
+  public onSubmit(reForm,form) {
     console.log(form);
-       
-    this.user = {UserId: null,FirstName:form.firstname, LastName: form.lastname,
+    
+    this.user = {UserId: this.userid,FirstName:form.firstname, LastName: form.lastname,
       EmployeeId:form.employeeid};
-     
-    this.userService.addUserDetails(this.user).subscribe(
+    
+    if(document.getElementById('btnadditem').innerHTML == "Update")
+       {
+         this.userService.updateUserDetails(this.user).subscribe(
+          taskList => {
+            alert("The Records has succussfully updated.")
+            document.getElementById('btnadditem').innerHTML = "Add";
+           this.istrue = false;
+           reForm.reset();
+          });
+       }
+       else
+       {
+         this.userService.addUserDetails(this.user).subscribe(
          taskList => {
            alert("The Records has succussfully saved.")
-           window.location.reload();
+           reForm.reset();
+          // window.location.reload();
           //this.router.navigate(['/adduser']);
          });
         }
-  
+       
+  }
 
      public onResetClick(form) {
       form.reset();
+      document.getElementById('btnadditem').innerHTML = "Add";
+      this.istrue = false;
      }
 
 }

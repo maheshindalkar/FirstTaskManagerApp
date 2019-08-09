@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnChanges, SimpleChanges, OnInit, Input, EventEmitter, Output  } from '@angular/core';
 import { Iuser } from 'src/app/taskmodel/Iuser';
 import { UserService } from 'src/app/service/user.service';
 import { $ } from 'protractor';
@@ -12,9 +12,20 @@ export class ViewuserComponent implements OnInit {
 
   errorMessage = '';
   users : Iuser[] =[];
-  //@Input() users: Iuser;
+  @Output() valueUpdate = new EventEmitter(); 
+  @Input() user: string;
   constructor(private userService: UserService) {
 
+  }
+  ngOnChanges(changes: SimpleChanges) {
+     if (changes['user']) {
+        this.userService.getUserDetails().subscribe(
+        userList => {
+          this.users = userList;
+        },
+        error => this.errorMessage = <any>error
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -27,8 +38,7 @@ export class ViewuserComponent implements OnInit {
     }
     public onEditUserClick(user)
     {
-       //$("#txtfirstname").val("5");
-       //var myInput = $("#txtfirstname");
+      this.valueUpdate.emit(user); 
       console.log(user.UserId);
     }
     public onDeleteUserClick(user)
@@ -39,7 +49,7 @@ export class ViewuserComponent implements OnInit {
           this.userService.getUserDetails().subscribe(
             userList => {
               this.users = userList;
-              window.location.reload();
+              alert("The Records has succussfully deleted.")
             },
             error => this.errorMessage = <any>error
           );

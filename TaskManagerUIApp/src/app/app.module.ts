@@ -13,6 +13,7 @@ import { UpdateuserComponent } from './updateuser/updateuser.component';
 import { AddprojectComponent } from './addproject/addproject.component';
 import { UpdateprojectComponent } from './updateproject/updateproject.component';
 import { ViewuserComponent } from './viewuser/viewuser.component';
+import { ViewprojectComponent } from './viewproject/viewproject.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ViewuserComponent } from './viewuser/viewuser.component';
     UpdateuserComponent,
     AddprojectComponent,
     UpdateprojectComponent,
-    ViewuserComponent
+    ViewuserComponent,
+    ViewprojectComponent
   ],
   imports: [
     BrowserModule,

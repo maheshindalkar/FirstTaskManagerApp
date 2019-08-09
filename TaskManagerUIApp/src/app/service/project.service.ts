@@ -2,37 +2,37 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { Iuser } from 'src/app/taskmodel/Iuser';
+import { Iproject } from 'src/app/taskmodel/Iproject';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'http://localhost:56858/api/users';
+  private url = 'http://localhost:56858/api/Project';
  
   
   constructor(private http: HttpClient) { }
 
       
-  getUserDetails(): Observable<Iuser[]> { 
+  getProjectDetails(): Observable<Iproject[]> { 
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
-    return this.http.get<Iuser[]>(this.url , httpOptions); 
+    return this.http.get<Iproject[]>(this.url , httpOptions); 
     } 
 
-    addUserDetails(user: Iuser): Observable<Iuser> { 
+    addProjectDetails(project: Iproject): Observable<Iproject> { 
       const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
-      return this.http.post<Iuser>(this.url ,user, httpOptions); 
+      return this.http.post<Iproject>(this.url ,project, httpOptions); 
       } 
 
-      deleteUserDetails(userID: number): Observable<Iuser> { 
+      deleteProjectDetails(projectID: number): Observable<Iproject> { 
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
-        return this.http.delete<Iuser>(this.url+'?id='+userID, httpOptions); 
+        return this.http.delete<Iproject>(this.url+'?id='+projectID, httpOptions); 
         } 
 
-        updateUserDetails(user: Iuser): Observable<Iuser> { 
+        updateProjectDetails(project: Iproject): Observable<Iproject> { 
           const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
-          return this.http.put<Iuser>(this.url ,user, httpOptions); 
+          return this.http.put<Iproject>(this.url ,project, httpOptions); 
           } 
         
 
