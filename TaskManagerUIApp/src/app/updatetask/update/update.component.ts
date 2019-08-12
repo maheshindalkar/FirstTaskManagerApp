@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
-  task:any;
+  task:{};
   userTaskId: any;
   parentId: any;
   tasks:Itask ;
@@ -17,24 +17,46 @@ export class UpdateComponent implements OnInit {
   formUser = {};
   constructor( private route: ActivatedRoute,private taskmanagerService: TaskManagerService,private router: Router) {  
   }
+  sdate:Date;
+  edate:Date;
+  tsk: string;
+  psk:string;
+  pror:string;
   ngOnInit() {
     this.display='block'; 
     this.route.paramMap.subscribe(params => {
-        this.task = params;
-      this.userTaskId = this.task.params.UserTaskId;
-      this.parentId = this.task.params.ParentId;
+        
+      this.task = {"tsk":params.getAll("Task"),"psk":params.getAll("ParentTask"),"sdate":params.getAll("StartDate"),
+      "edate":params.getAll("EndDate"),"pror":params.getAll("Priority")};
+      console.log(params.getAll("StartDate"));
+
+      this.userTaskId = params.getAll("TaskId")
+      //this.parentId = this.task.params.ParentId;
     });
   }
 
   public onModelSubmit(form) {
-       
-    this.tasks = {UserTaskId:parseInt(this.userTaskId, 10),ParentId:parseInt(this.parentId, 10),Task:form.name, ParentTask: form.parentTask,
-      StartDate:form.startDate, EndDate:form.endDate,
-      Priority:form.range};
-      
+    console.log(form.value.efDate);
+    console.log(form.value.efDate[0]);
+    //alert(form.value.straDate[0]);
+    //alert(form.value.efDate[0]);
+      // alert(form.value.efDate.parTask.value);
+    this.tasks = {TaskId:parseInt(this.userTaskId, 10),
+      Task:form.value.tname[0], 
+      ParentTask: form.value.parTask[0],
+      StartDate:form.value.straDate[0], 
+      EndDate:form.value.efDate[0],
+      Project:null,
+      User:null,
+      Status:null,
+      Priority:form.value.range[0]
+    };
+      console.log(this.tasks);
       this.taskmanagerService.updateTaskManagerDetails(this.tasks).subscribe(
         taskList => {
-          this.router.navigate(['/view']);
+          alert("The Records has succussfully Updated.")
+          this.router.navigate(['/viewtask']);
+          this.display='none';
         });
   }
       

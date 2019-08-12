@@ -13,7 +13,6 @@ export class AdduserComponent implements OnInit {
   errorMessage = '';
   pageTitle:string="Add Task";
   user:Iuser ;
-  formUser = {};
   userid: number;
   lstname: string = '';
   fstname: string = '';

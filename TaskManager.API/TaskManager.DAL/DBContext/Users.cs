@@ -13,9 +13,9 @@ namespace TaskManager.DAL
 
         public int EmployeeId { get; set; }
 
-        public ICollection<Project> Projects { get; set; }
+        //public ICollection<Project> Projects { get; set; }
 
-        public ICollection<Task> Tasks { get; set; }
+        //public ICollection<Task> Tasks { get; set; }
 
     }
 }

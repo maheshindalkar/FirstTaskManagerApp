@@ -25,9 +25,9 @@ errorMessage = '';
     
     public onDeleteClick(task)
     {
-      console.log(task.UserTaskId);
+      //console.log(task.UserTaskId);
       
-      this.taskmanagerService.deleteTaskManagerDetails(task.UserTaskId).subscribe(
+      this.taskmanagerService.deleteTaskManagerDetails(task.TaskId).subscribe(
         taskList => {
           this.taskmanagerService.getTaskManagerDetails().subscribe(
             taskList => {

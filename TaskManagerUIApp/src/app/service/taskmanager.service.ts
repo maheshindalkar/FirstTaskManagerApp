@@ -9,7 +9,7 @@ import { Itask } from 'src/app/taskmodel/Itask';
   providedIn: 'root'
 })
 export class TaskManagerService {
-  private url = 'https://taksmanagerapiservice.azurewebsites.net/api/TaskManager/';
+  private url = 'http://localhost:56858/api/Task/';
  
   
   constructor(private http: HttpClient) { }
@@ -21,7 +21,7 @@ export class TaskManagerService {
     } 
 
     addTaskManagerDetails(task: Itask): Observable<Itask> { 
-      const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*','Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT, DELETE'})}; 
       return this.http.post<Itask>(this.url ,task, httpOptions); 
       } 
 

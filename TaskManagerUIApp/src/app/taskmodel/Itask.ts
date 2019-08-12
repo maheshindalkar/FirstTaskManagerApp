@@ -1,7 +1,9 @@
 export interface Itask {
-  UserTaskId:number;
-  ParentId:number;
-    ParentTask:string;
+  TaskId:number;
+  ParentTask:string;
+  Status:string;
+  Project:string;
+  User:string;
     Task:string;
     StartDate:Date;
     EndDate:Date;

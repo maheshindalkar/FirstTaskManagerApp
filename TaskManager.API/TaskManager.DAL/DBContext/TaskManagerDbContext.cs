@@ -19,26 +19,26 @@ namespace TaskManager.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Task>()
-            .HasRequired<Parent>(s => s.ParentTask)
-            .WithMany(g => g.Tasks)
-            .HasForeignKey<int>(s => s.ParentId);
+            //modelBuilder.Entity<Task>()
+            //.HasRequired<Parent>(s => s.ParentTask)
+            //.WithMany(g => g.Tasks)
+            //.HasForeignKey<int>(s => s.ParentId);
 
-            modelBuilder.Entity<Task>()
-            .HasRequired<Project>(s => s.Projects)
-            .WithMany(g => g.Taks)
-            .HasForeignKey<int>(s => s.ProjectId);
+           // modelBuilder.Entity<Task>()
+           // .HasRequired<Project>(s => s.Projects)
+           // .WithMany(g => g.Taks)
+           // .HasForeignKey<int>(s => s.ProjectId);
 
-            modelBuilder.Entity<Task>()
-           .HasRequired<Users>(s => s.Users)
-           .WithMany(g => g.Tasks)
-           .HasForeignKey<int>(s => s.UserId);
+           // modelBuilder.Entity<Task>()
+           //.HasRequired<Users>(s => s.Users)
+           //.WithMany(g => g.Tasks)
+           //.HasForeignKey<int>(s => s.UserId);
 
-            modelBuilder.Entity<Project>()
-            .HasRequired<Users>(s => s.Users)
-            .WithMany(g => g.Projects)
-            .HasForeignKey<int>(s => s.ManagerId)
-            .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Project>()
+            //.HasRequired<Users>(s => s.Users)
+            //.WithMany(g => g.Projects)
+            //.HasForeignKey<int>(s => s.ManagerId)
+            //.WillCascadeOnDelete(false);
         }
         public class TaskInitializer : DropCreateDatabaseIfModelChanges<TaskManagerDbContext>
         {

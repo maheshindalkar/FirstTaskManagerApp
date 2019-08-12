@@ -8,7 +8,7 @@ import { Iproject } from 'src/app/taskmodel/Iproject';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ProjectService {
   private url = 'http://localhost:56858/api/Project';
  
   

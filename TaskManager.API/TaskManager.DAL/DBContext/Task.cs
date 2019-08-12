@@ -9,11 +9,12 @@ namespace TaskManager.DAL
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskId { get; set; }
 
-        public int ParentId { get; set; }
+        public string ParentTask { get; set; }
 
-        public int UserId { get; set; }
+        public string Project { get; set; }
 
-        public int ProjectId { get; set; }
+        public string User { get; set; }
+
         public string TasksDetail { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -21,10 +22,10 @@ namespace TaskManager.DAL
 
         public string Status { get; set; }
 
-        public Parent ParentTask { get; set; }
+        //public Parent ParentTask { get; set; }
 
-        public Project Projects { get; set; }
+        //public Project Projects { get; set; }
 
-        public Users Users { get; set; }
+        //public Users Users { get; set; }
     }
 }

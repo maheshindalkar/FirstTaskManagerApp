@@ -1,57 +1,131 @@
-<form #templateForm="ngForm" (ngSubmit)="onSubmit(templateForm.value)">
-  <div class="form-group row">
-    <label for="taskName" class="col-sm-2 col-form-label">Task Name</label>
-    <div class="col-sm-10">
-      <input type="text" name="name"
-      #name="ngModel"
-      required  [(ngModel)]="formUser.name" placeholder="Task task" />
-     </div>
+<div class="pb-2 mt-4 mb-2 border-bottom">
+    <h3>Add Tasks</h3>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Priority</label>
-
-    <div class="col-sm-10">
-      <input type="range" class="custom-range" max="30" min="0" 
-      name="range"
-      #range="ngModel"
-      [(ngModel)]="formUser.range"></div>
-
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Parent Task</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control"
-      name="parentTask"
-      #parentTask="ngModel"
-      [(ngModel)]="formUser.parentTask"
-       id="parentTask" placeholder="parent task" />
+  <form #addtaskform="ngForm" (ngSubmit)="onSubmit(addtaskform,addtaskform.value)">
+    <div class="form-group row">
+      <label for="project" class="col-sm-2 col-form-label"><strong>Project:</strong></label>
+      <div class="col-sm-7">
+          <input type="text" class="form-control" name='projectname'
+          #projectname="ngModel"
+          ngModel required  [(ngModel)]="Projects" placeholder="Project Name" />
+         </div>
+      <div class="col-sm-3">
+          <button class="btn btn-sm btn-secondary searchbutbackcolcor" id="search" (click)='openprojectModal()' type="button">Search</button>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="taskName" class="col-sm-2 col-form-label"><strong>Task:</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="taskName" placeholder="Task name" name="taskDetail" 
+      #taskDetail='ngModel'  ngModel required />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2">
+      </div>
+      <div class="form-check col-sm-10">
+        <input class="form-check-input" type="checkbox" value="" id="setParentTask" name="chkIsParent" ngModel required>
+        <label class="form-check-label" for="setParentTask">
+          Parent Task
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Priority:</strong></label>
+  
+      <div class="col-sm-9">
+        <input type="range" class="custom-range" max="30" min="0" id="formControlRange" name="priority" #priority ='ngModel' ngModel required>
+      </div>
+  
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Parent Task:</strong></label>
+      <div class="col-sm-7 ">
+          <input type="text" class="form-control" name='parentTask'
+          #parentTask="ngModel"
+          ngModel required  [(ngModel)]="prntTask" placeholder="Parent Task" />
+         </div>
+      <div class="col-sm-3">
+          <button class="btn btn-sm btn-secondary searchbutbackcolcor" id="searchparenttask" (click)='openparenttaskModal()' type="button">Search</button>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="startDate" class="col-sm-2 col-form-label"><strong>Start Date:</strong></label>
+      <div class="col-sm-4">
+        <input type="date" id="startDate" class="form-control datetextboxwidth" placeholder="start date" name="startDate"
+        #startDate='ngModel' ngModel required />
+      </div>
+  
+      <label for="endDate" class="col-sm-2 col-form-label"><strong>End Date:</strong></label>
+      <div class="col-sm-4">
+        <input type="date" id="endDate" class="form-control datetextboxwidth" placeholder="end date" name="endDate"
+        #endDate='ngModel' 
+        ngModel required />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>User:</strong> </label>
+      <div class="col-sm-7 ">
+          <input type="text" class="form-control" name='username'
+          #username="ngModel"
+          ngModel required  [(ngModel)]="uname" placeholder="User Name" />
+         
+        
+      </div>
+      <div class="col-sm-3">
+          <button class="btn btn-sm btn-secondary searchbutbackcolcor" id="searchuser" (click)='openuserModal()' type="button">Search</button>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-6">
+          <button type="submit" id="btnaddproject" class="btn btn-primary mr-2 butbackcolcor" >Add</button>
+          <button type="button" class="btn btn-secondary butbackcolcor" (click)='onResetClick(addtaskform)'>Reset</button>
+        </div>
+        </div>
+  </form>
+  <div class="row">
+      <div id="modal-backdrop" class="modal-backdrop-transparent modal-transition modal-backdrop-grey" [ngStyle]="{'display':display}"></div>       
+    <!-- Modal section -->
+    <div id="bootstrapModel" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+      <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">              
+            <h6 class="modal-title">Managers List</h6>
+            <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <!-- model body section -->
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" id="searchmanager" placeholder="Search Manager..." name="project" ngModel required />
+                  </div>
+                </div>
+                <div class="row">
+                    <ul class="list-group list-group-flush col-md-12">
+                        <li *ngFor="let item of items" class='list-group-item d-flex justify-content-between align-items-center'
+                          [class.selected]="item === selectedItem"
+                          (click)="onSelect(item)">
+                          {{item.name}} <span>{{item.id}}</span> 
+                        </li>
+                      </ul>
+                </div>
+                <div class="row d-none" *ngIf="selectedItem" >
+                    <div><span>id: </span>{{selectedItem.id}}</div>
+                    <div>
+                      <label>name: {{selectedItem.name}}                        
+                      </label>
+                    </div>
+                  
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseHandled()">Close</button>           
+            <button type="button" class="btn btn-primary" (click)="onClickSearchFilter()">Select</button>            
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
-    <div class="col-sm-10">
-      <input type="date" id="startDate" class="form-control"
-      name="startDate"
-      #startDate="ngModel"
-      [(ngModel)]="formUser.startDate"
-       />
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
-    <div class="col-sm-10">
-      <input type="date" id="endDate" class="form-control" 
-      name="endDate"
-      #endDate="ngModel"
-      [(ngModel)]="formUser.endDate"
-       />
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-10">
-      <button type="submit"  class="btn btn-primary mr-2">Add Task</button>
-      <button type="button" class="btn btn-secondary"(click)="onResetClick(templateForm)" >Reset</button>
-    </div>
-  </div>
-</form>

@@ -13,7 +13,7 @@ namespace TaskManager.DAL
         public DateTime EndDate { get; set; }
         public int Priority { get; set; }
         public int ManagerId { get; set; }
-        public Users Users { get; set; }
-        public ICollection<Task> Taks { get; set; }
+        //public Users Users { get; set; }
+        //public ICollection<Task> Taks { get; set; }
     }
 }

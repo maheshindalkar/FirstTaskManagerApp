@@ -8,8 +8,6 @@ namespace TaskManager.DAL
 {
     public class ProjectRepository : ITaskManagerRepository<ProjectModel>, IDisposable
     {
-        private object taskModel;
-
         public ProjectRepository()
         {
         }
@@ -48,6 +46,7 @@ namespace TaskManager.DAL
                                  select new ProjectModel()
                                  {
                                      ProjectId = u.ProjectId,
+                                     Projects = u.Projects,
                                      Priority = u.Priority,
                                      StartDate = u.StartDate,
                                      EndDate = u.EndDate,
@@ -78,7 +77,7 @@ namespace TaskManager.DAL
                     projectModel.EndDate = userTaskModel.EndDate;
 
                     context.Projects.Add(projectModel);
-                    context.Entry(taskModel).State = EntityState.Modified;
+                    context.Entry(projectModel).State = EntityState.Modified;
                     context.SaveChanges();
                 }
             }

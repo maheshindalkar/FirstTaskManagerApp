@@ -1,10 +1,10 @@
-<form>
+<form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm,projectForm.value)">
     <div class="form-group row">
-      <label for="project" class="col-sm-2 col-form-label"><strong>Project</strong></label>
+      <label for="project" class="col-sm-2 col-form-label"><strong>Project:</strong></label>
       <div class="col-sm-9">
-          <input type="text" class="form-control" name="projectname"
-          #name="ngModel"
-          required  [(ngModel)]="formUser.projectname" placeholder="Project Name" />
+          <input type="text" class="form-control" name='projectname'
+          #projectname="ngModel"
+          required  [(ngModel)]="Projects" placeholder="Project Name" />
       </div>
     </div>
     <div class="form-group row">
@@ -12,49 +12,48 @@
       </div>
       <div class="col-sm-3">
           <div class="col-sm-6" class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="setStartEndDae">
+              <input class="form-check-input" type="checkbox" value="" (change)="changeCheck($event)" ngModel id="setStartEndDae">
               <label class="form-check-label" for="defaultCheck1">
-                  Set Start and End Date
+                  :Set Start and End Date
               </label>
             </div>
       </div>
       <div class="col-sm-6 row datemargin ">
           <div class="datewidth startdatepadding">
               <input type="text" id="startDate" class="form-control"
-          name="startDate"
-          #startDate="ngModel"
-          [(ngModel)]="formUser.startDate" placeholder="StartDate" onfocus="(this.type='date')"
+          name="stDate"
+          #stDate="ngModel" [disabled]="disabledDate"
+          [(ngModel)]="StartDate" placeholder="StartDate" onfocus="(this.type='date')"
            />
             </div>
             <div class="datewidth">
-                <input type="text" id="endDate" class="form-control" 
-                name="endDate"
-                #endDate="ngModel"
-                [(ngModel)]="formUser.endDate" placeholder="EndDate" onfocus="(this.type='date')"
+                <input type="text" id="endDate" class="form-control"  [disabled]="disabledDate"
+                name="eDate"
+                #eDate="ngModel"
+                [(ngModel)]="EndDate " placeholder="EndDate" onfocus="(this.type='date')"
                  />
             </div>
-  
   
       </div>
     </div>
   
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><strong>Priority</strong></label>
+      <label class="col-sm-2 col-form-label"><strong>Priority:</strong></label>
   
       <div class="col-sm-9">
           <input type="range" class="custom-range" max="30" min="0" 
           name="range"
           #range="ngModel" placeholder="Enter Manager Name"
-          [(ngModel)]="formUser.range"></div>
-  
-    </div>
+          [(ngModel)]="Priority"></div>
+      </div>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label"><strong>Manager</strong></label>
+      <label class="col-sm-2 col-form-label"><strong>Manager:</strong></label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="manager" placeholder="Enter Manager Name" />
+          <input type="text" class="form-control" id="manager" disabled placeholder="Enter Manager Name" name="mgrId" #mgrId="ngModel" [(ngModel)]='ManagerId'
+          required />
       </div>
       <div class="col-sm-3">
-        <button class="btn btn-sm btn-secondary searchbutbackcolcor" id="search" type="button">Search</button>
+        <button class="btn btn-sm btn-secondary searchbutbackcolcor" id="search" (click)='openModal()' type="button">Search</button>
       </div>
     </div>
   
@@ -62,10 +61,56 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-4"></div>
         <div class="col-sm-6">
-          <button type="submit" class="btn btn-primary mr-2 butbackcolcor">Add</button>
-          <button type="button" class="btn btn-secondary butbackcolcor">Reset</button>
+          <button type="submit" id="btnaddproject" class="btn btn-primary mr-2 butbackcolcor">Add</button>
+          <button type="button" class="btn btn-secondary butbackcolcor" (click)='onResetClick()'>Reset</button>
         </div>
         </div>
+        
   </form>
-  <app-viewproject></app-viewproject>
+  
+  <div class="row">
+      <div id="modal-backdrop" class="modal-backdrop-transparent modal-transition modal-backdrop-grey" [ngStyle]="{'display':display}"></div>       
+    <!-- Modal section -->
+  <div id="bootstrapModel" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-dialog-centered">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">              
+          <h6 class="modal-title">Managers List</h6>
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <!-- model body section -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <input type="text" class="form-control" id="searchmanager" placeholder="Search Manager..." name="project" ngModel required />
+                </div>
+              </div>
+              <div class="row">
+                  <ul class="list-group list-group-flush col-md-12">
+                      <li *ngFor="let user of Users" class='list-group-item d-flex justify-content-between align-items-center'
+                        [class.selected]="user === selectedItem"
+                        (click)="onSelect(user)">
+                        {{user.FirstName}} <span>{{user.EmployeeId}}</span> 
+                      </li>
+                    </ul>
+              </div>
+              <div class="row d-none" *ngIf="selectedItem" >
+                  <div><span>id: </span>{{selectedItem.EmployeeId}}</div>
+                  <div>
+                    <label>name: {{selectedItem.FirstName}}                        
+                    </label>
+                  </div>
+                
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseHandled()">Close</button>           
+          <button type="button" class="btn btn-primary" (click)="onSelectedManager1()">Select</button>            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <app-viewproject [project]="project" (valueProjectUpdate)="getProjectUpdatedvalue($event)"></app-viewproject>
   
