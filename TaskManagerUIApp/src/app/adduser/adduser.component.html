@@ -1,3 +1,6 @@
+<div class="pb-2 mt-4 mb-2 border-bottom">
+    <h3>Add User</h3>
+  </div>
 <form #usertemplateForm="ngForm" (ngSubmit)="onSubmit(usertemplateForm,usertemplateForm.value)">
     <div class="form-group row">
       <label for="frstName" class="col-sm-2 col-form-label"><strong>First Name:</strong></label>
@@ -19,8 +22,8 @@
       <label for="employeeid" class="col-sm-2 col-form-label"><strong>Employee ID:</strong></label>
   
       <div class="col-sm-10">
-          <input type="text" name="employeeid" disabled='{{istrue}}' class="empwidth" id="txtempid"
-          #employeeid="ngModel"
+          <input type="text" name="employid"  class="empwidth" id="txtempid"
+          #employid="ngModel"
           required  [(ngModel)]="empid" placeholder="Employee ID" />
          </div>
       </div>

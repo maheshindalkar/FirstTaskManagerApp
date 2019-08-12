@@ -17,7 +17,7 @@ export class AdduserComponent implements OnInit {
   lstname: string = '';
   fstname: string = '';
   btnadd: string = '';
-  empid: string = '';
+  empid: number;
   istrue : boolean = false;
   
   constructor(private userService: UserService,private router: Router) {
@@ -37,11 +37,12 @@ export class AdduserComponent implements OnInit {
     } 
 
   public onSubmit(reForm,form) {
+    this.istrue = false;
     console.log(form);
     
     this.user = {UserId: this.userid,FirstName:form.firstname, LastName: form.lastname,
-      EmployeeId:form.employeeid};
-    
+      EmployeeId:form.employid};
+    //alert(form.employid);
     if(document.getElementById('btnadditem').innerHTML == "Update")
        {
          this.userService.updateUserDetails(this.user).subscribe(

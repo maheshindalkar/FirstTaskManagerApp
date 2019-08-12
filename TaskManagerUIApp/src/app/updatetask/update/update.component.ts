@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
-  task:{};
+  task:any;
   userTaskId: any;
   parentId: any;
   tasks:Itask ;
@@ -25,31 +25,29 @@ export class UpdateComponent implements OnInit {
   ngOnInit() {
     this.display='block'; 
     this.route.paramMap.subscribe(params => {
-        
-      this.task = {"tsk":params.getAll("Task"),"psk":params.getAll("ParentTask"),"sdate":params.getAll("StartDate"),
-      "edate":params.getAll("EndDate"),"pror":params.getAll("Priority")};
-      console.log(params.getAll("StartDate"));
-
-      this.userTaskId = params.getAll("TaskId")
-      //this.parentId = this.task.params.ParentId;
-    });
+      console.log(params);
+      this.task = params;
+    this.userTaskId = this.task.params.TaskId;
+   // this.parentId = this.task.params.ParentId;
+  });
   }
 
   public onModelSubmit(form) {
-    console.log(form.value.efDate);
-    console.log(form.value.efDate[0]);
+   
     //alert(form.value.straDate[0]);
     //alert(form.value.efDate[0]);
       // alert(form.value.efDate.parTask.value);
+      
+
     this.tasks = {TaskId:parseInt(this.userTaskId, 10),
-      Task:form.value.tname[0], 
-      ParentTask: form.value.parTask[0],
-      StartDate:form.value.straDate[0], 
-      EndDate:form.value.efDate[0],
+      Task:form.name, 
+      ParentTask: form.parentTask,
+      StartDate:form.startDate, 
+      EndDate:form.endDate,
       Project:null,
       User:null,
       Status:null,
-      Priority:form.value.range[0]
+      Priority:form.endDate
     };
       console.log(this.tasks);
       this.taskmanagerService.updateTaskManagerDetails(this.tasks).subscribe(

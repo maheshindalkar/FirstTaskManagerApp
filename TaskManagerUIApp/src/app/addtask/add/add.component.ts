@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
         for(var i = 0; i < usList.length; i++) {
            var obj = {
             "id":usList[i].UserId,
-            "name":usList[i].FirstName+ +usList[i].LastName,
+            "name":usList[i].FirstName,
             "filterby":"userfiltr"
             };
             
