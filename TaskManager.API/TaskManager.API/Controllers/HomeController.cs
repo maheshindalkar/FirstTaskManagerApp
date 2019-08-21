@@ -10,7 +10,7 @@ namespace TaskManager.API.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Mahesh Home Page";
+            ViewBag.Title = "Home Page";
 
             return View();
         }

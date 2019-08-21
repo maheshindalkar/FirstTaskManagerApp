@@ -16,6 +16,7 @@ import { ViewuserComponent } from './viewuser/viewuser.component';
 import { ViewprojectComponent } from './viewproject/viewproject.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { ViewprojectComponent } from './viewproject/viewproject.component';
     AddprojectComponent,
     UpdateprojectComponent,
     ViewuserComponent,
-    ViewprojectComponent
+    ViewprojectComponent,
+    AppRoutingModule
   ],
   imports: [
     BrowserModule,

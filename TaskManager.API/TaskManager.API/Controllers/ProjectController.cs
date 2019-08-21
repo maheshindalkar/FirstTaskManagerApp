@@ -19,7 +19,6 @@ namespace TaskManager.API.Controllers
             {
                 using (var project = new ProjectsOperations())
                 {
-
                     return project.GetProjectDetails();
                 }
             }
@@ -30,13 +29,13 @@ namespace TaskManager.API.Controllers
             }
         }
         // POST api/values
-        public void Post([FromBody]ProjectModel record)
+        public bool Post([FromBody]ProjectModel record)
         {
             try
             {
                 using (var projectOperation = new ProjectsOperations())
                 {
-                    var opSuccess = projectOperation.InsertProjectDetail(record);
+                    return projectOperation.InsertProjectDetail(record);
                 }
             }
             catch (Exception ex)
@@ -47,14 +46,16 @@ namespace TaskManager.API.Controllers
         }
 
         // PUT api/values/5
-        public void Put([FromBody]ProjectModel record)
+        public bool Put([FromBody]ProjectModel record)
         {
             try
             {
+                bool success = false;
                 using (var projectOpertaion = new ProjectsOperations())
                 {
-                    var opSuccess = projectOpertaion.UpdateProjectDetail(record);
+                    success = projectOpertaion.UpdateProjectDetail(record);
                 }
+                return success;
             }
             catch (Exception ex)
             {
@@ -64,13 +65,13 @@ namespace TaskManager.API.Controllers
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
                 using (var projectOperation = new ProjectsOperations())
                 {
-                    var opSuccess = projectOperation.DeleteProjectById(id);
+                    return projectOperation.DeleteProjectById(id);
                 }
             }
             catch (Exception ex)

@@ -31,13 +31,13 @@ namespace TaskManager.API.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]UsersModel record)
+        public bool Post([FromBody]UsersModel record)
         {
             try
             {
                 using (var userOperation = new UsersOperations())
                 {
-                    var opSuccess = userOperation.InsertUserDetail(record);
+                    return userOperation.InsertUserDetail(record);
                 }
             }
             catch (Exception ex)
@@ -48,13 +48,13 @@ namespace TaskManager.API.Controllers
         }
 
         // PUT api/values/5
-        public void Put([FromBody]UsersModel record)
+        public bool Put([FromBody]UsersModel record)
         {
             try
             {
                 using (var userOperation = new UsersOperations())
                 {
-                    var opSuccess = userOperation.UpdateUserDetail(record);
+                   return userOperation.UpdateUserDetail(record);
                 }
             }
             catch (Exception ex)
@@ -65,13 +65,13 @@ namespace TaskManager.API.Controllers
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
                 using (var userOperation = new UsersOperations())
                 {
-                    var opSuccess = userOperation.DeleteUserById(id);
+                   return userOperation.DeleteUserById(id);
                 }
             }
             catch (Exception ex)

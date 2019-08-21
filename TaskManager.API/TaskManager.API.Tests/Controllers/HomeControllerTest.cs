@@ -1,14 +1,15 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using TaskManager.API;
 using TaskManager.API.Controllers;
 
-namespace TaskManager.API.Tests.Controllers
+namespace TaskManager.API.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Test]
         public void Index()
         {
             // Arrange
@@ -18,8 +19,8 @@ namespace TaskManager.API.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            NUnit.Framework.Assert.IsNotNull(result);
+            NUnit.Framework.Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
     }
 }

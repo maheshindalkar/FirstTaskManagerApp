@@ -1,25 +1,42 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AdduserComponent } from './adduser.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule , HttpClientXsrfModule} from '@angular/common/http';
 
-describe('AdduserComponent', () => {
-  let component: AdduserComponent;
-  let fixture: ComponentFixture<AdduserComponent>;
+import { RouterModule } from '@angular/router';
 
+describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdduserComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,HttpClientTestingModule,
+        FormsModule , 
+        ReactiveFormsModule,
+        BrowserModule,HttpClientModule,RouterModule
+      ],
+      declarations: [
+        AdduserComponent,
+        ],
+    }).compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AdduserComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AdduserComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it(`should have as title 'Project Manager'`, () => {
+    const fixture = TestBed.createComponent(AdduserComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual(undefined);
   });
+ 
 });
+
+
+

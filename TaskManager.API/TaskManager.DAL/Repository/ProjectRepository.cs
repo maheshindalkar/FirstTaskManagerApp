@@ -70,6 +70,10 @@ namespace TaskManager.DAL
                     var projectModel = (from c in context.Projects
                                      where c.ProjectId == userTaskModel.ProjectId
                                      select c).FirstOrDefault();
+                    if (projectModel == null)
+                    {
+                        return false;
+                    }
                     projectModel.Projects = userTaskModel.Projects;
                     projectModel.Priority = userTaskModel.Priority;
                     projectModel.ManagerId = userTaskModel.ManagerId;
@@ -97,6 +101,10 @@ namespace TaskManager.DAL
                     var projectModel = (from c in context.Projects
                                      where c.ProjectId == id
                                      select c).FirstOrDefault();
+                    if(projectModel == null)
+                    {
+                        return false;
+                    }
                     context.Projects.Remove(projectModel);
                     context.Entry(projectModel).State = EntityState.Deleted;
                     context.SaveChanges();

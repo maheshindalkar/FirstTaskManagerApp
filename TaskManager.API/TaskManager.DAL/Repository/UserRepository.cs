@@ -66,6 +66,10 @@ namespace TaskManager.DAL
                     var taskModel = (from c in context.Users
                                      where c.UsersId == userTaskModel.UserId
                                      select c).FirstOrDefault();
+                    if(taskModel== null)
+                    {
+                        return false;
+                    }
                     taskModel.FirstName = userTaskModel.FirstName;
                     taskModel.LastName = userTaskModel.LastName;
                     taskModel.EmployeeId = userTaskModel.EmployeeId;
@@ -91,6 +95,10 @@ namespace TaskManager.DAL
                     var taskModel = (from c in context.Users
                                      where c.UsersId == id
                                      select c).FirstOrDefault();
+                    if (taskModel == null)
+                    {
+                        return false;
+                    }
                     context.Users.Remove(taskModel);
                     context.Entry(taskModel).State = EntityState.Deleted;
                     context.SaveChanges();

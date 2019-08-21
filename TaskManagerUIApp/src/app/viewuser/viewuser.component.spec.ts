@@ -1,25 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ViewuserComponent } from './viewuser.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe('ViewuserComponent', () => {
-  let component: ViewuserComponent;
-  let fixture: ComponentFixture<ViewuserComponent>;
-
+describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewuserComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,HttpClientTestingModule
+      ],
+      declarations: [
+        ViewuserComponent
+      ],
+    }).compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ViewuserComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(ViewuserComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it(`should have as title undefined`, () => {
+    const fixture = TestBed.createComponent(ViewuserComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual(undefined);
   });
+ 
 });
+

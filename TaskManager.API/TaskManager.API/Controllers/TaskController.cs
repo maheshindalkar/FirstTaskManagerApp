@@ -31,13 +31,13 @@ namespace TaskManager.API.Controllers
         }
 
        // POST api/values
-        public void Post([FromBody]TaskModel record)
+        public bool Post([FromBody]TaskModel record)
         {
             try
             {
                 using (var task = new TaskOperations())
                 {
-                    var opSuccess = task.InsertTask(record);
+                    return task.InsertTask(record);
                 }
             }
             catch (Exception ex)
@@ -48,13 +48,13 @@ namespace TaskManager.API.Controllers
         }
 
         // PUT api/values/5
-        public void Put([FromBody]TaskModel record)
+        public bool Put([FromBody]TaskModel record)
         {
             try
             {
                 using (var task = new TaskOperations())
                 {
-                    var opSuccess = task.UpdateTask(record);
+                    return task.UpdateTask(record);
                 }
             }
             catch (Exception ex)
@@ -65,13 +65,13 @@ namespace TaskManager.API.Controllers
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
                 using (var task = new TaskOperations())
                 {
-                    var opSuccess = task.DeleteTaskById(id);
+                    return task.DeleteTaskById(id);
                 }
             }
             catch (Exception ex)
